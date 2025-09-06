@@ -1,0 +1,47 @@
+package com.financialportfolio.repositories;
+
+import com.financialportfolio.entities.FinancialAdvisor;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.Optional;
+
+@Repository
+public interface FinancialAdvisorRepository extends JpaRepository<FinancialAdvisor, Long> {
+    Optional<FinancialAdvisor> findByEmail(String email);
+    Optional<FinancialAdvisor> findByUuid(String uuid);
+}
+
+java
+
+package com.financialportfolio.repositories;
+
+import com.financialportfolio.entities.Client;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface ClientRepository extends JpaRepository<Client, Long> {
+    List<Client> findByFinancialAdvisorId(Long advisorId);
+    Optional<Client> findByUuid(String uuid);
+}
+
+java
+
+package com.financialportfolio.repositories;
+
+import com.financialportfolio.entities.Security;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface SecurityRepository extends JpaRepository<Security, Long> {
+    List<Security> findByClientId(Long clientId);
+    Optional<Security> findByUuid(String uuid);
+}
